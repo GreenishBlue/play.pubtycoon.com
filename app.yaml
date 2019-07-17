@@ -9,8 +9,11 @@ automatic_scaling:
   max_concurrent_requests: 50
 
 handlers:
+- url: /static
+  static_dir: static
+  expiration: "31557600s"
 - url: /dist
-  static_dir: dist
+  static_dir: dist 
 - url: /.*
   secure: always
   script: auto
