@@ -16,3 +16,4 @@ Investigate Web APIS
 Today I want to get something onto the screen (a 2d plane)
 I want to add camera controls for rotating the screen around this plane
 I also want to make some initial UI
+Need to look at having a stable game loop (proper deltas and stuff)

@@ -53,6 +53,7 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['es2015'],
+          plugins: ['transform-custom-element-classes', 'transform-es2015-classes']
         },
       }
     ],
