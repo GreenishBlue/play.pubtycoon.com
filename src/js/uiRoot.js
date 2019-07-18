@@ -11,6 +11,10 @@ class UIRoot extends HTMLElement
     this.render();
   }
 
+  setContext(context) {
+    console.log(context);
+  }
+
   /**
    * Called when element added to DOM.
    */
@@ -53,7 +57,12 @@ class UIRoot extends HTMLElement
 
   render()
   {
-    this.innerHTML = '<span>Suuper Early Dev Build</span>';
+    this.innerHTML = `
+      <span>Suuper Early Dev Build</span>
+      <ul>
+        <li><a href="#"><i class="material-icons">menu</i></a></li>
+      </ul>
+    `;
   }
 }
 

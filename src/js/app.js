@@ -70,6 +70,8 @@ class GameApp
     this.controls.update();
     
     this.addDemoScene();
+    this.uiRootReference = document.querySelector('ui-root');
+    this.uiRootReference.setContext(this);
     
     requestAnimationFrame(() => this.doFrame());
   }
@@ -97,7 +99,13 @@ class GameApp
     cube.rotation.set(0.4, 0.2, 0);
   }
 
-  doFrame() {
+  testPing()
+  {
+    console.log('ping');
+  }
+
+  doFrame()
+  {
     requestAnimationFrame(() => this.doFrame());
     this.doRender();
     this.doUpdates();
@@ -106,28 +114,19 @@ class GameApp
   /**
    * Render the scene.
    */
-  doRender() {
+  doRender()
+  {
     this.renderer.render(this.scene, this.camera);
   }
   
   /**
    * Process all updates.
    */
-  doUpdates() {
+  doUpdates()
+  {
     this.controls.update();
   }
 }
 
 export { GameApp as App }
 window.game = new GameApp();
-
-
-
-
-
-
-
-
-
-
-
