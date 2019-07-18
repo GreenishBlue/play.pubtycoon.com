@@ -69,22 +69,20 @@ class GameApp
     this.camera.position.set( 0, 20, 30 );
     this.controls.update();
     
-    let self = this;
-    function render() {
-      // requestAnimationFrame(render);
+    this.addDemoScene();
     
-      // required if controls.enableDamping or controls.autoRotate are set to true
-      // controls.update();
-    
-      // self.renderer.render(self.scene, self.camera);
-    }
-    
+    requestAnimationFrame(() => this.doFrame());
+  }
+
+  /**
+   * Add demo objects to the scene.
+   */
+  addDemoScene() {
     var boxGeometry = new BoxGeometry(10, 10, 10);
     var basicMaterial = new MeshBasicMaterial({ color: 0x0095DD });
     
     var light = new AmbientLight( 0x404040 ); // soft white light
     this.scene.add(light);
-    
     var light2 = new HemisphereLight( 0xffffbb, 0x080820, 1 );
     this.scene.add(light2);
     
@@ -92,18 +90,11 @@ class GameApp
     var material = new MeshBasicMaterial( {color: 0xffff00, side: DoubleSide} );
     var plane = new Mesh( geometry, material );
     this.scene.add(plane);
-    // plane.rotation.set(0, 1, 0); // how is rotation set? - ah, RAD
-    // plane.rotation.set(Math.PI / 2, 0, 0);
-    // plane.rotation.setFromVector3(new Vector3( Math.PI / 2, 0, 0));
     plane.rotateX(Math.PI / 2);
-    // plane.translateY(-1);
     
     var cube = new Mesh(boxGeometry, basicMaterial);
     this.scene.add(cube);
     cube.rotation.set(0.4, 0.2, 0);
-    
-    // this.doRender();
-    requestAnimationFrame(() => this.doFrame());
   }
 
   doFrame() {
