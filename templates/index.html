@@ -15,10 +15,24 @@
   <link rel="manifest" href="/static/site.webmanifest">
   <link rel="stylesheet" href="/dist/build/bundle.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Material+Icons&display=swap" rel=stylesheet>
+  <link href="/static/font/css/materialdesignicons.min.css" rel=stylesheet>
 </head>
 
 <body>
-  <ui-root></ui-root>
+  <ui-root>
+    <ul class="menu-side">
+      <li><ui-root-button icon="menu" size="default"></ui-root-button></li>
+      <li><ui-root-button icon="create" size="default"></ui-root-button></li>
+      <li><ui-root-button icon="timeline" size="default"></ui-root-button></li>
+      <li><ui-root-button icon="work" size="default"></ui-root-button></li>
+      <li><ui-root-button icon="shopping_cart" size="default"></ui-root-button></li>
+      <li><ui-root-button icon="people" size="default"></ui-root-button></li>
+    </ul>
+
+    <ui-quick-stats>
+        <!-- <ui-root-button icon="pause" size="small"></ui-root-button> -->
+    </ui-quick-stats>
+  </ui-root>
   <script src="/dist/build/bundle.js"></script>
 </body>
 

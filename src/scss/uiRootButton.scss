@@ -1,0 +1,46 @@
+@import './uiShadow';
+
+ui-root-button {
+  div {
+    /* Base */
+    width: 40px; height: 40px;
+    border-radius: 20px;
+
+    /* Colour & Font */
+    background-color: $pub-root-button-bg-colour;
+    color: #fff;
+    text-align: center;
+    
+    /* Animation */
+    transition: background-color 160ms ease;
+  }
+
+  div.small {
+    width: 30px         !important; 
+    height: 30px        !important;
+    border-radius: 15px !important;
+  }
+
+  .small i {
+    padding-top: 6px;
+    font-size: 18px;
+  }
+  
+  i {
+    padding-top: 8px;
+    color: #fff;
+    transition: color 160ms ease;
+  }
+}
+
+ui-root-button:hover,
+ui-root-button:active {
+  div {
+    background-color: $pub-root-button-hover-colour;
+  }
+
+  i {
+    color: $pub-root-button-bg-colour;
+  }
+}
+

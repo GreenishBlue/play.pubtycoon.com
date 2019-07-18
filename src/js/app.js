@@ -10,7 +10,11 @@ import {
   PlaneGeometry,
   Mesh, } from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import { UIRoot } from './uiRoot';
+import { StateMachine } from 'javascript-state-machine';
+
+// UI imports. Needed to register web components.
+import './uiRoot';
+import './uiRootButton';
 
 /**
  * Entry-point for application. 
@@ -25,8 +29,7 @@ class GameApp
    * 
    * @param {*} rendererOptions Render options passed to THREE.WebGLRenderer.
    */
-  constructor(rendererOptions = { antialias: true })
-  {
+  constructor(rendererOptions = { antialias: true }) {
     console.log('Hello, world!');
 
     // Setup renderer.
@@ -36,7 +39,6 @@ class GameApp
     this.renderer = new WebGLRenderer(rendererOptions);
     this.renderer.setClearColor(0xDDDDDD, 1);
     this.renderer.setSize(sceneWidth, sceneHeight);
-    document.body.appendChild(this.renderer.domElement);
 
     // Setup camera.
     const cameraFov = 75.0,
@@ -50,12 +52,11 @@ class GameApp
 
     // Setup orbit controls.
     const orbitZoomSpeed = 5.0,
-          orbitPanSpeed = 2.0,
-          orbitMaxDistance = 1500,
-          orbitMinDistance = 0.0;
+          orbitPanSpeed = 0.0, // disable pan
+          orbitMaxDistance = 100,
+          orbitMinDistance = 30;
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.enabled = true;
-    this.controls.autoRotate = true;
     this.controls.zoomSpeed = orbitZoomSpeed;
     this.controls.panSpeed = orbitPanSpeed;
     this.controls.maxDistance = orbitMaxDistance;
@@ -66,12 +67,13 @@ class GameApp
     this.scene.add(this.camera);
 
     //controls.update() must be called after any manual changes to the camera's transform
-    this.camera.position.set( 0, 20, 30 );
+    this.camera.position.set(0, 20, 30);
     this.controls.update();
     
     this.addDemoScene();
     this.uiRootReference = document.querySelector('ui-root');
     this.uiRootReference.setContext(this);
+    this.uiRootReference.appendChild(this.renderer.domElement);
     
     requestAnimationFrame(() => this.doFrame());
   }
@@ -80,50 +82,31 @@ class GameApp
    * Add demo objects to the scene.
    */
   addDemoScene() {
-    var boxGeometry = new BoxGeometry(10, 10, 10);
+    var boxGeometry = new BoxGeometry(40, 40, 2);
     var basicMaterial = new MeshBasicMaterial({ color: 0x0095DD });
-    
-    var light = new AmbientLight( 0x404040 ); // soft white light
-    this.scene.add(light);
-    var light2 = new HemisphereLight( 0xffffbb, 0x080820, 1 );
-    this.scene.add(light2);
-    
-    var geometry = new PlaneGeometry( 40, 40, 1, 1 ); // w, h, wsegs, hsegs
-    var material = new MeshBasicMaterial( {color: 0xffff00, side: DoubleSide} );
-    var plane = new Mesh( geometry, material );
-    this.scene.add(plane);
+
+    var plane = new Mesh(boxGeometry, basicMaterial);
     plane.rotateX(Math.PI / 2);
-    
-    var cube = new Mesh(boxGeometry, basicMaterial);
-    this.scene.add(cube);
-    cube.rotation.set(0.4, 0.2, 0);
+    this.scene.add(plane);
   }
 
-  testPing()
-  {
-    console.log('ping');
-  }
-
-  doFrame()
-  {
+  doFrame() {
     requestAnimationFrame(() => this.doFrame());
-    this.doRender();
     this.doUpdates();
+    this.doRender();
   }
 
   /**
    * Render the scene.
    */
-  doRender()
-  {
+  doRender() {
     this.renderer.render(this.scene, this.camera);
   }
   
   /**
    * Process all updates.
    */
-  doUpdates()
-  {
+  doUpdates() {
     this.controls.update();
   }
 }

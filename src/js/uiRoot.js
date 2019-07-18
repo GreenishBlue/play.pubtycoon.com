@@ -1,3 +1,5 @@
+import './uiRootButton';
+
 /**
  * Entry-point for UI based stuff.
  * 
@@ -5,10 +7,9 @@
  */
 class UIRoot extends HTMLElement
 {
-  constructor()
-  {
+  constructor() {
     super();
-    this.render();
+    var wrapper = document.createElement('slot');
   }
 
   setContext(context) {
@@ -18,50 +19,54 @@ class UIRoot extends HTMLElement
   /**
    * Called when element added to DOM.
    */
-  connectedCallback()
-  {
+  connectedCallback() {
     console.log('UI Root connected to DOM');
   }
 
     /**
    * Called when element removed from DOM.
    */
-  disconnectedCallback()
-  {
+  disconnectedCallback() {
     console.log('UI Root Disconected from DOM');
   }
 
   /**
    * Called when element's observed attribute is changed.
    */
-  attributeChangedCallback(name, oldVal, newVal)
-  {
+  attributeChangedCallback(name, oldVal, newVal) {
     // console.log(`Attribute: ${name} changed!`);
   }
 
   /**
    * Defines list of attributes to observe with attributeChangedCallback.
    */
-  static get observedAttributes()
-  {
+  static get observedAttributes() {
     return [];
   }
 
   /**
    * Called when element added to DOM.
    */
-  adoptedCallback()
-  {
+  adoptedCallback() {
     console.log('adopted!');
   }
 
-  render()
-  {
+  get checked() {
+    return this.hasAttribute('checked');
+  }
+
+  set checked(val) {
+      if (val) {
+          this.setAttribute('checked', '');
+      } else {
+          this.removeAttribute('checked');
+      }
+  }
+
+  render() {
     this.innerHTML = `
       <span>Suuper Early Dev Build</span>
-      <ul>
-        <li><a href="#"><i class="material-icons">menu</i></a></li>
-      </ul>
+      <slot></slot>
     `;
   }
 }
