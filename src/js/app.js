@@ -35,6 +35,11 @@ class GameApp
   constructor(rendererOptions = { antialias: true }) {
     console.log('Hello, world!');
 
+    console.log('Registering service worker');
+    if (navigator.serviceWorker && !navigator.serviceWorker.controller) {
+      navigator.serviceWorker.register('/static/serviceWorker.js');
+    }
+
     // Setup renderer.
     const sceneWidth = window.innerWidth,
           sceneHeight = window.innerHeight;
