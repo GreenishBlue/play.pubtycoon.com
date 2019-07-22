@@ -60,7 +60,7 @@ class GameApp
     this.controls.enablePan = false;
     this.controls.zoomSpeed = 1.0;
     this.controls.maxZoom = 80;
-    this.controls.minZoom = 15;
+    this.controls.minZoom = 5;
 
     // Initialise scene and add camera.
     this.scene = new Scene();
