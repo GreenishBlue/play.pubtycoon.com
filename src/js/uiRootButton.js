@@ -13,7 +13,7 @@ class UIRootButton extends HTMLElement
   }
 
   setContext(context) {
-    console.log(context);
+    // console.log('Context assigned')
   }
 
   /**

@@ -13,7 +13,7 @@ class UIRoot extends HTMLElement
   }
 
   setContext(context) {
-    console.log(context);
+    // console.log('Context assigned')
   }
 
   /**
@@ -61,13 +61,6 @@ class UIRoot extends HTMLElement
       } else {
           this.removeAttribute('checked');
       }
-  }
-
-  render() {
-    this.innerHTML = `
-      <span>Suuper Early Dev Build</span>
-      <slot></slot>
-    `;
   }
 }
 
