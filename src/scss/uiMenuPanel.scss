@@ -1,0 +1,21 @@
+@import './uiShadow';
+
+ui-menu-panel {
+  @extend .shadow;
+
+  // Position this to the left.
+  position: absolute;
+  width: 500px;
+  height: 100%;
+
+  left: -25vw;  top: 0;
+  
+  background-color: #333;
+
+  // Drawer entry-exit animation.
+  transition: 400ms;
+}
+
+ui-menu-panel[opened] {
+  left: 0;
+}

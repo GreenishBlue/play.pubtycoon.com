@@ -33,6 +33,19 @@ ui-root-button {
   }
 }
 
+ui-root-button.disabled,
+ui-root-button.disabled:hover {
+  div {
+    background-color: #777;
+  }
+}
+
+ui-root-button.disabled:hover {
+  i {
+    color: #fff;
+  }
+}
+
 ui-root-button:hover,
 ui-root-button:active {
   div {

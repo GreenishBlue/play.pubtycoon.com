@@ -22,13 +22,17 @@
 <body>
   <ui-root>
     <ul class="menu-side">
-      <li><ui-root-button icon="menu" size="default"></ui-root-button></li>
+      <li><ui-root-button class="disabled" icon="menu" size="default"></ui-root-button></li>
       <li><ui-root-button icon="create" size="default"></ui-root-button></li>
-      <li><ui-root-button icon="timeline" size="default"></ui-root-button></li>
-      <li><ui-root-button icon="work" size="default"></ui-root-button></li>
-      <li><ui-root-button icon="shopping_cart" size="default"></ui-root-button></li>
-      <li><ui-root-button icon="people" size="default"></ui-root-button></li>
+      <li><ui-root-button class="disabled"icon="timeline" size="default"></ui-root-button></li>
+      <li><ui-root-button class="disabled"icon="work" size="default"></ui-root-button></li>
+      <li><ui-root-button class="disabled"icon="shopping_cart" size="default"></ui-root-button></li>
+      <li><ui-root-button class="disabled"icon="people" size="default"></ui-root-button></li>
     </ul>
+
+    <ui-menu-panel opened>
+      menu panel
+    </ui-menu-panel>
 
     <ui-quick-stats>
         <!-- <ui-root-button icon="pause" size="small"></ui-root-button> -->

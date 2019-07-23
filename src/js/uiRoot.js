@@ -50,18 +50,6 @@ class UIRoot extends HTMLElement
   adoptedCallback() {
     console.log('adopted!');
   }
-
-  get checked() {
-    return this.hasAttribute('checked');
-  }
-
-  set checked(val) {
-      if (val) {
-          this.setAttribute('checked', '');
-      } else {
-          this.removeAttribute('checked');
-      }
-  }
 }
 
 window.customElements.define('ui-root', UIRoot);

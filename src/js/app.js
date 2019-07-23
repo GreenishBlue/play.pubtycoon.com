@@ -7,6 +7,7 @@ import {
   MeshBasicMaterial,
   MeshStandardMaterial,
   DirectionalLight,
+  GridHelper,
   AmbientLight,
   HemisphereLight,
   DoubleSide,
@@ -15,9 +16,12 @@ import {
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 // import { StateMachine } from 'javascript-state-machine';
 
+import { CRoomFoundations } from './roomFoundations';
+
 // UI imports. Needed to register web components.
 import './uiRoot';
 import './uiRootButton';
+import './uiMenuPanel';
 
 /**
  * Entry-point for application. 
@@ -73,14 +77,19 @@ class GameApp
     
     //controls.update() must be called after any manual changes to the camera's transform
     this.camera.position.set(30, 25, 30);
-    this.camera.zoom = 25;
+    this.camera.zoom = 20;
     this.camera.updateProjectionMatrix();
     this.controls.update();
-    
-    this.addDemoScene();
+
     this.uiRootReference = document.querySelector('ui-root');
     this.uiRootReference.setContext(this);
     this.uiRootReference.appendChild(this.renderer.domElement);
+    
+    // Add default stuff to the scene.
+    this.addDefaultScene();
+
+    // Initialise gameplay systems.
+    this.systemRoomFoundations = new CRoomFoundations(this);
     
     requestAnimationFrame(() => this.doFrame());
   }
@@ -88,20 +97,11 @@ class GameApp
   /**
    * Add demo objects to the scene.
    */
-  addDemoScene() {
-    var boxGeometry = new BoxGeometry(50, 50, 1);
-    var basicMaterial = new MeshStandardMaterial({ color: 0x666666 });
-    // basicMaterial.roughness = 1; // attenuates roughnessMap
-    // basicMaterial.metalness = 1;
-
+  addDefaultScene() {
     var directionalLight = new DirectionalLight(0xFFFFFF, 1);
-    directionalLight.position.set( 100, 350, 250 );
+    directionalLight.position.set(100, 350, 250);
     directionalLight.castShadow = true;
     this.scene.add(directionalLight);
-
-    var plane = new Mesh(boxGeometry, basicMaterial);
-    plane.rotateX(Math.PI / 2);
-    this.scene.add(plane);
   }
 
   doFrame() {
@@ -121,6 +121,7 @@ class GameApp
    * Process all updates.
    */
   doUpdates() {
+    this.systemRoomFoundations.update();
     this.controls.update();
   }
 }
