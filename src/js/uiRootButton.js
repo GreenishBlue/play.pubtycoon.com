@@ -12,24 +12,6 @@ class UIRootButton extends HTMLElement
     this.render();
   }
 
-  setContext(context) {
-    // console.log('Context assigned')
-  }
-
-  /**
-   * Called when element added to DOM.
-   */
-  connectedCallback() {
-    console.log('UI Button connected to DOM');
-  }
-
-    /**
-   * Called when element removed from DOM.
-   */
-  disconnectedCallback() {
-    console.log('UI Button Disconected from DOM');
-  }
-
   /**
    * Called when element's observed attribute is changed.
    */
@@ -49,13 +31,6 @@ class UIRootButton extends HTMLElement
    */
   static get observedAttributes() {
     return ['icon', 'size'];
-  }
-
-  /**
-   * Called when element added to DOM.
-   */
-  adoptedCallback() {
-    // console.log('adopted!');
   }
 
   render() {

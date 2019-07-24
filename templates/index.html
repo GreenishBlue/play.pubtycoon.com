@@ -21,16 +21,22 @@
 
 <body>
   <ui-root>
+    <ui-loading>
+      <div class="title">Pub Tycoon</div>
+      <div class="version">v0.1-alpha1</div>
+    </ui-loading>
     <ul class="menu-side">
       <li><ui-root-button class="disabled" icon="menu" size="default"></ui-root-button></li>
-      <li><ui-root-button icon="create" size="default"></ui-root-button></li>
+      <li><ui-root-button icon="bug_report" size="default"></ui-root-button></li>
+      <li><ui-root-button icon="create" size="default"  onclick="window.game.gameToolManager.activeTool = 'roomFoundationBuild';"></ui-root-button></li>
+      <li><ui-root-button icon="delete" size="default"></ui-root-button></li>
       <li><ui-root-button class="disabled"icon="timeline" size="default"></ui-root-button></li>
       <li><ui-root-button class="disabled"icon="work" size="default"></ui-root-button></li>
       <li><ui-root-button class="disabled"icon="shopping_cart" size="default"></ui-root-button></li>
       <li><ui-root-button class="disabled"icon="people" size="default"></ui-root-button></li>
     </ul>
 
-    <ui-menu-panel opened>
+    <ui-menu-panel>
       menu panel
     </ui-menu-panel>
 

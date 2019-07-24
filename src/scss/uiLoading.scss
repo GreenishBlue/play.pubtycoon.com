@@ -1,0 +1,27 @@
+ui-loading {
+  z-index: 10;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  font-family: 'Roboto Slab', Arial, sans-serif;
+
+  transition: 1s;
+}
+
+ui-loading[loaded] {
+  opacity: 0;
+}
+
+ui-loading .title {
+  padding-top: 45vh;
+  font-size: 32px;
+}
+
+ui-loading .version {
+  font-size: 12px;
+}

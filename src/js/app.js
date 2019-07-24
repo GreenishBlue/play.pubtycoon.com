@@ -16,10 +16,14 @@ import {
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 // import { StateMachine } from 'javascript-state-machine';
 
+import { CGameEntity } from './gameEntity';
+import { CGameToolManager } from './gameToolManager';
+import { CRoomFoundationBuildTool } from './tools/roomFoundationBuildTool';
 import { CRoomFoundations } from './roomFoundations';
 
 // UI imports. Needed to register web components.
 import './uiRoot';
+import './uiLoading';
 import './uiRootButton';
 import './uiMenuPanel';
 
@@ -69,7 +73,7 @@ class GameApp
     this.controls.enablePan = false;
     this.controls.zoomSpeed = 1.0;
     this.controls.maxZoom = 80;
-    this.controls.minZoom = 5;
+    this.controls.minZoom = 30;
 
     // Initialise scene and add camera.
     this.scene = new Scene();
@@ -77,7 +81,7 @@ class GameApp
     
     //controls.update() must be called after any manual changes to the camera's transform
     this.camera.position.set(30, 25, 30);
-    this.camera.zoom = 20;
+    this.camera.zoom = 50;
     this.camera.updateProjectionMatrix();
     this.controls.update();
 
@@ -89,9 +93,31 @@ class GameApp
     this.addDefaultScene();
 
     // Initialise gameplay systems.
-    this.systemRoomFoundations = new CRoomFoundations(this);
-    
-    requestAnimationFrame(() => this.doFrame());
+    // Create the root game entity.
+    this.rootEntity = new CGameEntity(null);
+    this.rootEntity.gameApp = this;
+    this.roomFoundations = new CRoomFoundations(this.rootEntity);
+    this.roomFoundations.addRoom();
+
+    const self = this;
+    const tools = {
+      'roomFoundationBuild': new CRoomFoundationBuildTool(self.roomFoundations),
+    };
+    this.gameToolManager = new CGameToolManager(this, tools);
+    this.gameToolManager.activeTool = 'roomFoundationBuild';
+    console.log(this.gameToolManager.activeTool);
+
+    // Pause before starting.
+    setTimeout(() => {
+      const uiLoadingReference = document.querySelector('ui-loading');
+      uiLoadingReference.loaded = true; // removes the loader
+      setTimeout(() => uiLoadingReference.parentNode.removeChild(uiLoadingReference), 1200); // Wait 5 seconds.
+    }, 1000);
+    requestAnimationFrame(() => self.doFrame());
+  }
+
+  printGameEntities() {
+    console.log(this.rootEntity.children);
   }
 
   /**
@@ -121,7 +147,8 @@ class GameApp
    * Process all updates.
    */
   doUpdates() {
-    this.systemRoomFoundations.update();
+    // Update root entity, and all children recursively.
+    this.rootEntity.update();
     this.controls.update();
   }
 }

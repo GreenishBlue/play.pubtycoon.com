@@ -7,5 +7,6 @@ $pub-root-button-bg-colour: #333333;
 $pub-root-button-hover-colour: $pub-primary-colour;
 
 @import './uiRoot';
+@import './uiLoading';
 @import './uiRootButton';
 @import './uiMenuPanel';
