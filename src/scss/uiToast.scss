@@ -1,0 +1,20 @@
+@import './uiShadow.scss';
+@import './uiCard.scss';
+
+ui-toast {
+  @extend .shadow;
+  @extend .card;
+
+  position: fixed;
+  bottom: 0; right: 0;
+  width: 200px;
+
+  padding: 12px;
+  margin: 8px;
+
+  display: none; // hide by default
+}
+
+ui-toast[visible] {
+  display: block;
+}

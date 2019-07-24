@@ -23,6 +23,7 @@ import { CRoomFoundations } from './roomFoundations';
 import './uiRoot';
 import './uiRootButton';
 import './uiMenuPanel';
+import './uiToast';
 
 /**
  * Entry-point for application. 
@@ -85,6 +86,9 @@ class GameApp
     this.uiRootReference = document.querySelector('ui-root');
     this.uiRootReference.setContext(this);
     this.uiRootReference.appendChild(this.renderer.domElement);
+
+    this.uiToastReference = document.querySelector('#toast-build-room');
+    this.uiToastReference.setAttribute('visible', 'true');
     
     // Add default stuff to the scene.
     this.addDefaultScene();
