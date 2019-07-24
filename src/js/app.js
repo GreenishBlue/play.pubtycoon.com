@@ -23,6 +23,7 @@ import { CRoomFoundations } from './roomFoundations';
 import './uiRoot';
 import './uiRootButton';
 import './uiMenuPanel';
+import './uiStats';
 import './uiToast';
 
 /**
@@ -79,7 +80,7 @@ class GameApp
     
     //controls.update() must be called after any manual changes to the camera's transform
     this.camera.position.set(30, 25, 30);
-    this.camera.zoom = 20;
+    this.camera.zoom = 15;
     this.camera.updateProjectionMatrix();
     this.controls.update();
 
@@ -107,8 +108,11 @@ class GameApp
    * Add demo objects to the scene.
    */
   addDefaultScene() {
+    const light = new AmbientLight(0x404040);
+    this.scene.add(light);
+
     var directionalLight = new DirectionalLight(0xFFFFFF, 1);
-    directionalLight.position.set(100, 350, 250);
+    directionalLight.position.set(0, 5, 5);
     directionalLight.castShadow = true;
     this.scene.add(directionalLight);
   }
