@@ -16,6 +16,7 @@ import {
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 // import { StateMachine } from 'javascript-state-machine';
 
+import { CGameEntity } from './gameEntity';
 import { CRoomFoundations } from './roomFoundations';
 
 // UI imports. Needed to register web components.
@@ -90,6 +91,10 @@ class GameApp
 
     // Initialise gameplay systems.
     this.systemRoomFoundations = new CRoomFoundations(this);
+
+    this.rootEntity = new CGameEntity(null);
+    this.rootEntity.gameApp = this; // set manually
+    this.testEntity = new CGameEntity(this.rootEntity);
     
     requestAnimationFrame(() => this.doFrame());
   }
