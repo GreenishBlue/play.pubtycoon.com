@@ -26,6 +26,8 @@ import './uiRoot';
 import './uiLoading';
 import './uiRootButton';
 import './uiMenuPanel';
+import './uiStats';
+import './uiToast';
 
 /**
  * Entry-point for application. 
@@ -81,13 +83,16 @@ class GameApp
     
     //controls.update() must be called after any manual changes to the camera's transform
     this.camera.position.set(30, 25, 30);
-    this.camera.zoom = 50;
+    this.camera.zoom = 15;
     this.camera.updateProjectionMatrix();
     this.controls.update();
 
     this.uiRootReference = document.querySelector('ui-root');
     this.uiRootReference.setContext(this);
     this.uiRootReference.appendChild(this.renderer.domElement);
+
+    this.uiToastReference = document.querySelector('#toast-build-room');
+    this.uiToastReference.setAttribute('visible', 'true');
     
     // Add default stuff to the scene.
     this.addDefaultScene();
@@ -98,6 +103,12 @@ class GameApp
     this.rootEntity.gameApp = this;
     this.roomFoundations = new CRoomFoundations(this.rootEntity);
     this.roomFoundations.addRoom();
+
+    this.rootEntity = new CGameEntity(null);
+    this.rootEntity.gameApp = this; // set manually
+    this.testEntity = new CGameEntity(this.rootEntity);
+    
+    requestAnimationFrame(() => this.doFrame());
 
     const self = this;
     const tools = {
@@ -124,8 +135,11 @@ class GameApp
    * Add demo objects to the scene.
    */
   addDefaultScene() {
+    const light = new AmbientLight(0x404040);
+    this.scene.add(light);
+
     var directionalLight = new DirectionalLight(0xFFFFFF, 1);
-    directionalLight.position.set(100, 350, 250);
+    directionalLight.position.set(0, 5, 5);
     directionalLight.castShadow = true;
     this.scene.add(directionalLight);
   }
