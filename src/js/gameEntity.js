@@ -22,11 +22,11 @@ export class CGameEntity
   /**
    * Construct the entity.
    */
-  constructor(parentEntity, name='GameObject') {
+  constructor(parentEntity, name='GameObject', gameApp = null) {
     /**
      * Reference to parent entity.
      */
-    this.parentEntity = parentEntity;
+    this.parent = parentEntity;
     if(parentEntity != null) {
       // We want to tell the parent that we're attaching. We'll keep checking
       // for a valid name until we hit one.
@@ -34,9 +34,9 @@ export class CGameEntity
       let isCollision = parentEntity.getChild(validName) != null;
       let n = 1;
       while(isCollision == true) {
-	validName = `${name} (${n})`;
+	      validName = `${name} (${n})`;
         isCollision = parentEntity.getChild(validName) != null;
-	n++;
+	      n++;
       }
       parentEntity.addChild(validName, this);
       this.name = validName;
@@ -54,8 +54,11 @@ export class CGameEntity
      */
     this.components = {};
 
-    if (parent != null) {
-      this.gameApp = parent.gameApp;
+    if (gameApp != null) {
+      this.gameApp = gameApp;
+    } else if (parent != null) {
+      this.gameApp = parentEntity.gameApp;
+    } else {
       console.warn('No parent set! No reference to GameApp!');
     }
 

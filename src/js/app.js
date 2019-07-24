@@ -99,14 +99,10 @@ class GameApp
 
     // Initialise gameplay systems.
     // Create the root game entity.
-    this.rootEntity = new CGameEntity(null);
-    this.rootEntity.gameApp = this;
+    this.rootEntity = new CGameEntity(null, 'RootEntity', this);
     this.roomFoundations = new CRoomFoundations(this.rootEntity);
-    this.roomFoundations.addRoom();
-
-    this.rootEntity = new CGameEntity(null);
-    this.rootEntity.gameApp = this; // set manually
-    this.testEntity = new CGameEntity(this.rootEntity);
+    // this.roomFoundations.addRoom();
+    // this.testEntity = new CGameEntity(this.rootEntity);
     
     requestAnimationFrame(() => this.doFrame());
 
@@ -116,7 +112,6 @@ class GameApp
     };
     this.gameToolManager = new CGameToolManager(this, tools);
     this.gameToolManager.activeTool = 'roomFoundationBuild';
-    console.log(this.gameToolManager.activeTool);
 
     // Pause before starting.
     setTimeout(() => {

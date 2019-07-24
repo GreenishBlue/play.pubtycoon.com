@@ -27,8 +27,8 @@ export class CRoomFoundations extends CGameEntity
    * 
    * @param {PubTycoon.GameApp} gameApp Reference to GameApp.
    */
-  constructor(gameApp) {
-    this.gameApp = gameApp;
+  constructor(parent) {
+    super(parent);
     /**
      * Stores room dimensions.
      */
@@ -63,19 +63,19 @@ export class CRoomFoundations extends CGameEntity
     const plane = new Mesh(geometry, this.material);
     plane.rotateX(Math.PI / 2);
     plane.position.set(0, -0.5 - 5, 0);
-    this.gameApp.scene.add(plane);
+    // this.gameApp.scene.add(plane);
 
     const plane2 = new Mesh(geometry, this.woodMaterial);
     plane2.rotateX(Math.PI / 2);
     plane2.position.set(0, 0.5 - 5, 0);
-    this.gameApp.scene.add(plane2);
+    // this.gameApp.scene.add(plane2);
 
     const wall1 = new Mesh(new BoxGeometry(length, 10, 1), this.material);
     const wall2 = new Mesh(new BoxGeometry(1, 10, length), this.material);
     wall1.position.set(0, 0, -25.5);
     wall2.position.set(-25.5, 0, 0);
-    this.gameApp.scene.add(wall1);
-    this.gameApp.scene.add(wall2);
+    // this.gameApp.scene.add(wall1);
+    // this.gameApp.scene.add(wall2);
 
     const colorGrid       = 0xFFFFFF,
           colorCenterLine = 0xFFCF1E,
@@ -84,7 +84,7 @@ export class CRoomFoundations extends CGameEntity
     var gridHelper = new GridHelper(gridSize, gridDivisions, colorCenterLine,
                                     colorGrid);
     gridHelper.position.set(0, -3.99, 0);
-    this.gameApp.scene.add(gridHelper);
+    // this.gameApp.scene.add(gridHelper);
   }
 
   addRoom() {
@@ -97,7 +97,7 @@ export class CRoomFoundations extends CGameEntity
     // this.floorEntity.addComponent(meshComp);
     mesh.rotateX(Math.PI / 2);
     mesh.position.set(0, -0.25, 0);
-    this.gameApp.scene.add(mesh);
+    // this.gameApp.scene.add(mesh);
   }
 
   /**
